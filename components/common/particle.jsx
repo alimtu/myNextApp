@@ -1,0 +1,127 @@
+import React from "react";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
+import { usePageContext } from "../contexts/page-context";
+
+function Particle() {
+  const {
+    darkMode,
+    starColor,
+    starSpeed,
+    starSize,
+    starShape,
+    starCount,
+    starPlay,
+  } = usePageContext();
+  const particlesInit = async (main) => {
+    await loadFull(main);
+  };
+  return (
+    <Particles
+      init={particlesInit}
+      id="tsparticles"
+      params={{
+        fullScreen: {
+          zIndex: 2,
+        },
+        particles: {
+          number: {
+            value: starCount,
+            density: {
+              enable: true,
+              value_area: 800,
+            },
+          },
+          color: {
+            value: starColor,
+          },
+          shape: {
+            type: starShape,
+          },
+          opacity: {
+            value: 1,
+            random: true,
+            anim: {
+              enable: true,
+              speed: 1,
+              opacity_min: 0,
+              sync: false,
+            },
+          },
+          size: {
+            value: starSize,
+            random: true,
+            anim: {
+              enable: false,
+              speed: 4,
+              size_min: 0.3,
+              sync: false,
+            },
+          },
+          line_linked: {
+            enable: false,
+            distance: 150,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: starPlay,
+            speed: starSpeed,
+            direction: "none",
+            random: true,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+            attract: {
+              enable: false,
+              rotateX: 600,
+              rotateY: 600,
+            },
+          },
+        },
+        interactivity: {
+          events: {
+            onclick: {
+              enable: true,
+              mode: "repulse",
+            },
+            resize: true,
+          },
+          modes: {
+            grab: {
+              distance: 200,
+              line_linked: {
+                opacity: 1,
+              },
+            },
+            bubble: {
+              distance: 250,
+              size: 0,
+              duration: 2,
+              opacity: 0,
+              speed: 3,
+            },
+            repulse: {
+              distance: 200,
+              duration: 0.4,
+            },
+            push: {
+              particles_nb: 4,
+            },
+            remove: {
+              particles_nb: 2,
+            },
+          },
+        },
+        retina_detect: true,
+        // background: {
+        //   color: "#F55353",
+        //   opacity: 0.4,
+        // },
+      }}
+    />
+  );
+}
+
+export default Particle;
